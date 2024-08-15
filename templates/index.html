@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scrolling with HTMX</title>
+    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+    <style>
+        /* CSS for smooth image loading */
+        .htmx-settling img {
+            opacity: 1000;
+        }
+        img {
+            transition: opacity 30000ms ease-in;
+        }
+    </style>
+</head>
+<body>
+
+<div id="contacts-container">
+    <h2>Contacts</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody id="contacts-rows" hx-get="/contacts/?page=1" hx-trigger="load" hx-swap="innerHTML">
+            <!-- Data will load here on page load -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Load more data as you scroll to the bottom of the page
+    window.addEventListener("scroll", function() {
+        const lastRow = document.querySelector("#contacts-rows tr:last-child");
+        if (lastRow && lastRow.getAttribute("hx-trigger") === "revealed") {
+            const rect = lastRow.getBoundingClientRect();
+            if (rect.bottom <= window.innerHeight) {
+                lastRow.scrollIntoView();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

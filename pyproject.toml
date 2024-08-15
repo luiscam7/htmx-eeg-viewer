@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "htmx-eeg-viewer"
+version = "0.1.0"
+description = "Create a basic EEG viewer with infinite scroll using synthetic eeg data and HTMX. Powered and served through a API"
+authors = ["luiscam7 <lcamargo2007@gmail.com>"]
+license = "mit"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.112.0"
+pydantic = "^2.8.2"
+numpy = "^2.0.1"
+pandas = "^2.2.2"
+neurodsp = "^2.2.1"
+uvicorn = "^0.30.6"
+fastapi-cli = "^0.0.5"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.5.7"
+isort = "^5.13.2"
+pytest = "^8.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
